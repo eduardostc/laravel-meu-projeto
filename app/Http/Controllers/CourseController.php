@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Course;
+
+class CourseController extends Controller
+{
+    //Listar os cursos
+    public function index(){
+        //Código para listar os cursos
+           //dd('listar os cursos');
+        //CARREGAR A VIEW
+        return view('courses.index');
+    }
+    //Detalhes do curso
+    public function show(){ 
+        //CARREGAR A VIEW
+        return view('courses.show');
+    }
+     //Carregar o formulário cadastrar novo curso
+     public function create(){ 
+        //CARREGAR A VIEW
+        return view('courses.create');
+    }
+     //Cadastrar no BD o novo curso
+     public function store(Request $request){ 
+        //Cadastrar no BD na tabela cursos os valores de todos os campos
+        Course::create($request->all());
+        //Course::created([ 'name' => $request->name]);
+        //Redirecionar o usuáiro, enviar a msg de sucesso.
+        return redirect()->route('course.show')->with('success', 'Curso cadastrado com sucesso!');
+    }
+    //Carregar o formulário cadastrar novo curso
+    public function edit(){ 
+        //CARREGAR A VIEW
+        return view('courses.edit');
+    }
+        //Editar no BD o novo curso
+        public function update(){ 
+        dd('Editar no BD o novo curso');
+    }
+
+    //Deletar no BD o novo curso
+    public function destroy(){ 
+        dd('Excluir o curso no BD');
+    }
+}
