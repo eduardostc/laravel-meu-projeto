@@ -10,15 +10,19 @@ class CourseController extends Controller
 {
     //Listar os cursos
     public function index(){
-        //Código para listar os cursos
-           //dd('listar os cursos');
+        //Recuperar os registro do BD
+         //dd('listar os cursos'); teste de VARDAMP
+        $courses = Course::orderByDesc('created_at')->paginate(10);
         //CARREGAR A VIEW
-        return view('courses.index');
+        return view('courses.index', ['courses' => $courses,]);
     }
     //Detalhes do curso
-    public function show(){ 
+    public function show(Request $request){ 
+        
+        //Recuperar as informações do curso do bd.
+       $course = Course::where('id', $request->courseId)->first();
         //CARREGAR A VIEW
-        return view('courses.show');
+        return view('courses.show', ['course' => $course]);
     }
      //Carregar o formulário cadastrar novo curso
      public function create(){ 

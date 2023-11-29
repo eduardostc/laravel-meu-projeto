@@ -9,17 +9,14 @@
 
     <br>
     <a href="{{ route('course.index')}}">Listar</a><br>
-    <a href="{{ route('course.show')}}">Visualizar</a><br>
-    <a href="{{ route('course.edit')}}">Editar</a><br>
-     <!-- <a href="{{ route('course.destroy')}}">Apagar</a>  -->
 
     <h2>Cadastrar Cursos</h2>
 
      <form action="{{ route('course.store') }}" method="POST">
-     @csrf
-     @method('POST')
+     @csrf <!-- Para que a aplicação não aceite dados de formulários externo.  -->
+     @method('POST') <!-- Indica que estar utilizando o methodo post  -->
      
-        <LAbel>Nome: </LAbel>
+        <LAbel>Nome: </LAbel><!-- o atributo NAME E ID recebe o nome da coluna no banco de dados-->
         <input type="text" name="name" id="name" placeholder="Nome do Curso" value="{{ old('name') }}" require><br><br>
         <button type="submit">Cadastrar</button>
 

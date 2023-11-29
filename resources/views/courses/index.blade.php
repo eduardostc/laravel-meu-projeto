@@ -6,11 +6,27 @@
     <title>Celke</title>
 </head>
 <body>
+    <br>
+   
+    <a href="{{ route('course.create')}}">Cadastrar</a><br>
+
     <h2>Listar os Cursos</h2>
 
-    <a href="{{ route('course.show')}}">Visualizar</a><br>
-    <a href="{{ route('course.create')}}">Cadastrar</a><br>
-    <a href="{{ route('course.edit')}}">Editar</a><br>
-     <!-- <a href="{{ route('course.destroy')}}">Apagar</a>  -->
+     @forelse ($courses as $course)
+        ID: {{ $course->id }} <br>
+        Name: {{ $course->name }} <br>
+        Cadastrado: {{ \Carbon\Carbon::parse($course->created_at)->tz('America/Sao_Paulo')
+            ->format('d/m/Y H:i:s') }} <br>
+        Editado: {{ \Carbon\Carbon::parse($course->updated_at)->tz('America/Sao_Paulo')
+            ->format('d/m/Y H:i:s') }} <br><hr>
+        <a href="{{ route('course.show', ['courseId'=> $course->id]) }}">Visualizar</a><br>
+        <hr>
+
+     @empty
+       <p style="color: red"> Nenhum curso foi encontrado!</p>
+     @endforelse
+
+     {{ $courses->links() }}
+
 </body>
 </html>
